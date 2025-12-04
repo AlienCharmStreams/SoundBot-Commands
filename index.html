@@ -18,7 +18,7 @@
             position: relative;
         }
 
-        /* Анимированные звёзды (как на странице конфига) */
+        /* Анимированные звёзды */
         body::before {
             content: "";
             position: fixed;
@@ -37,7 +37,6 @@
             to { transform: translateY(-1000px); }
         }
 
-        /* Мерцание звёзд */
         @keyframes twinkle {
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
@@ -63,6 +62,7 @@
             margin-bottom: 0.5rem;
             text-align: center;
         }
+        
         h2 {
             color: #6c5ce7;
             font-size: 1.5rem;
@@ -70,6 +70,7 @@
             padding-bottom: 0.5rem;
             position: relative;
         }
+        
         h2::after {
             content: "";
             position: absolute;
@@ -80,16 +81,102 @@
             background: linear-gradient(90deg, #6c5ce7 0%, transparent 100%);
         }
 
+        /* Новые стили для информационного блока */
+        .info-block {
+            background: rgba(108, 92, 231, 0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #6c5ce7;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .info-title {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .charm-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.2rem 0;
+        }
+
+        .charm-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .charm-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .charm-icon {
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .charm-text {
+            flex-grow: 1;
+            color: #e0e0e0;
+        }
+
+        .balance-check {
+            display: inline-block;
+            background: rgba(108, 92, 231, 0.2);
+            color: #ffffff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .balance-check:hover {
+            background: rgba(108, 92, 231, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .section {
+            background: rgba(17, 17, 17, 0.7);
+            border-radius: 8px;
+            padding: 1.2rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 2rem;
+        }
+
         /* Списки с анимированными звёздочками */
         ul {
             list-style-type: none;
             padding-left: 0;
         }
+        
         li {
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
         }
+        
         li::before {
             content: "✦";
             position: absolute;
@@ -98,6 +185,7 @@
             font-size: 0.8em;
             animation: pulse 2s infinite;
         }
+        
         @keyframes pulse {
             0%, 100% { opacity: 0.7; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.1); }
@@ -117,18 +205,12 @@
             color: #ffffff;
             font-weight: 500;
         }
+        
         .subtext {
             color: #aaa;
             font-size: 0.9rem;
         }
-        .section {
-            background: rgba(17, 17, 17, 0.7);
-            border-radius: 8px;
-            padding: 1.2rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 2rem;
-        }
+        
         .command {
             font-family: monospace;
             color: #6c5ce7;
@@ -137,8 +219,39 @@
             border-radius: 4px;
         }
 
+        /* Розыгрыш */
+        .giveaway {
+            background: rgba(255, 193, 7, 0.08);
+            border-left: 4px solid #ffcc00;
+            margin-top: 1.5rem;
+        }
+
+        .giveaway-title {
+            color: #ffcc00;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .giveaway-conditions {
+            background: rgba(255, 193, 7, 0.05);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
         @media (max-width: 600px) {
             body { padding: 1rem; }
+            .charm-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .charm-icon {
+                margin-bottom: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -146,15 +259,91 @@
     <h1>🎵 ЗВУКОВОЙ БОТ ЧАТА</h1>
     <p style="text-align: center; color: #aaa; margin-bottom: 2rem;">Активируйте звуки в чате за шармы ✨</p>
 
-    <div class="section">
-        <h2>📢 Как это работает</h2>
-        <ul>
-            <li><span class="highlight">Стоимость озвучки:</span> <span class="command">500 шармов</span></li>
-            <li><span class="highlight">Проверить баланс:</span> напишите в чат <span class="command">!шармы</span></li>
-            <li>Шармы выдаются за активность в чате и на усмотрение стримера</li>
-        </ul>
+    <!-- Новый информационный блок -->
+    <div class="info-block">
+        <div class="info-title">🤖 У нас в чате живёт специальный бот, который превращает вашу активность в валюту — Шармы!</div>
+        <p style="color: #ccc; margin-bottom: 1.5rem;">Чем вы активнее, тем больше шармов получаете:</p>
+        
+        <h3 style="color: #8c7bee; font-size: 1.1rem; margin-bottom: 1rem;">💎 КАК ЗАРАБАТЫВАТЬ ШАРМЫ:</h3>
+        
+        <div class="charm-list">
+            <div class="charm-item">
+                <div class="charm-icon">💬</div>
+                <div class="charm-text"><strong>+20 шармов</strong> за каждое ваше сообщение</div>
+            </div>
+            
+            <div class="charm-item">
+                <div class="charm-icon">🤍</div>
+                <div class="charm-text"><strong>На 100 лайков</strong> на стриме — раздача <strong>1000 шармов</strong></div>
+            </div>
+            
+            <div class="charm-item">
+                <div class="charm-icon">✨</div>
+                <div class="charm-text"><strong>+500 шармов</strong> за каждые следующие <strong>50 лайков</strong></div>
+            </div>
+            
+            <div class="charm-item">
+                <div class="charm-icon">🎉</div>
+                <div class="charm-text"><strong>Дополнительные бонусы</strong> за участие в активностях и конкурсах</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <button class="balance-check" onclick="alert('В чате напишите команду: !Шармы')">📊 Проверить баланс: !Шармы</button>
+        </div>
     </div>
 
+    <!-- Блок про звуковые команды -->
+    <div class="info-block">
+        <div class="info-title">🔊 КАК ИСПОЛЬЗОВАТЬ ЗВУКОВЫЕ КОМАНДЫ</div>
+        <p style="color: #ccc; margin-bottom: 1rem;">Каждый звук стоит <strong>500 шармов</strong>. Напишите команду в чат — и звук прозвучит на стриме!</p>
+        
+        <div style="background: rgba(108, 92, 231, 0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+            <span class="command" style="font-size: 1.1rem;">!звук [название]</span>
+            <p style="color: #aaa; margin-top: 0.5rem; font-size: 0.9rem;">Например: !звук база, !звук x-files</p>
+        </div>
+        
+        <p style="color: #8c7bee; font-weight: 600; margin-top: 1rem;">🎶 Библиотека звуков представлена ниже</p>
+    </div>
+
+    <!-- Блок про розыгрыши -->
+    <div class="info-block giveaway">
+        <div class="info-title">🎁 РОЗЫГРЫШИ ПРОХОЖДЕНИЙ ИГР</div>
+        <p style="color: #ffcc00; margin-bottom: 1rem;">Пару раз в сезон я провожу розыгрыши среди самых активных участников чата!</p>
+        
+        <div class="giveaway-conditions">
+            <h4 style="color: #ffffff; margin-bottom: 0.8rem;">Условия участия:</h4>
+            <div class="charm-list">
+                <div class="charm-item" style="background: transparent; padding: 0.5rem 0;">
+                    <div class="charm-icon">🥉</div>
+                    <div class="charm-text"><strong>Базовый розыгрыш:</strong> баланс от <strong>40,000+ шармов</strong></div>
+                </div>
+                
+                <div class="charm-item" style="background: transparent; padding: 0.5rem 0;">
+                    <div class="charm-icon">🥇</div>
+                    <div class="charm-text"><strong>Расширенный розыгрыш:</strong> баланс от <strong>100,000+ шармов</strong></div>
+                </div>
+                
+                <div class="charm-item" style="background: transparent; padding: 0.5rem 0;">
+                    <div class="charm-icon">✓</div>
+                    <div class="charm-text">Быть подписанным на канал</div>
+                </div>
+                
+                <div class="charm-item" style="background: transparent; padding: 0.5rem 0;">
+                    <div class="charm-icon">✓</div>
+                    <div class="charm-text">Соблюдать правила чата</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <div style="background: rgba(255, 193, 7, 0.15); padding: 1rem; border-radius: 8px; display: inline-block;">
+                <span style="color: #ffcc00; font-weight: 600; font-size: 1.1rem;">🎄 Ближайший розыгрыш — 31 декабря!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Остальные секции со звуками -->
     <div class="section">
         <h2>🎤 Приветствия</h2>
         <ul>
@@ -210,5 +399,32 @@
             <li><span class="command">!hasta la vista</span></li>
         </ul>
     </div>
+
+    <script>
+        // Простая анимация при наведении на карточки
+        document.addEventListener('DOMContentLoaded', function() {
+            const charmItems = document.querySelectorAll('.charm-item');
+            
+            charmItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(5px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+            
+            // Имитация проверки баланса
+            document.querySelector('.balance-check').addEventListener('click', function() {
+                const originalText = this.textContent;
+                this.textContent = 'Проверяем...';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 800);
+            });
+        });
+    </script>
 </body>
 </html>
